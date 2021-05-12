@@ -1,0 +1,19 @@
+sudo: false
+language: node_js
+node_js:
+  - 12.16.2 # use nodejs v12.16.2 LTS
+cache: npm
+branches:
+  only:
+    - main # build main branch only
+script:
+  - hexo clean
+  - hexo generate # generate static files
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GH_TOKEN
+  keep-history: true
+  on:
+    branch: gh-pages
+  local-dir: public
